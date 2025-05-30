@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@config "../../../tailwind.config.js";
+@plugin "daisyui" {
+    themes: dark --default;
+}
+
+@theme {
+    --color-dark-100: #3b414d;
+    --color-dark-200: #2f343e;
+    --color-dark-300: #282c33;
+    --color-dark-content-100: #dce0e5;
+    --color-dark-content-200: #a9afbc;
+    --color-dark-content-300: #464b57;
+}
+
+body {
+    font-family:
+        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
