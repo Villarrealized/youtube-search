@@ -1,11 +1,8 @@
 import { html, css, LitElement } from "lit";
+import { TWStyles } from "./tailwind-gen.js";
 
 export class SimpleGreeting extends LitElement {
-    static styles = css`
-        p {
-            color: var(--color-dark-content-100);
-        }
-    `;
+    static styles = [TWStyles, css``];
 
     static properties = {
         name: { type: String },
@@ -17,7 +14,7 @@ export class SimpleGreeting extends LitElement {
     }
 
     render() {
-        return html`<p>Hello, ${this.name}!</p>`;
+        return html`<p class="text-dark-content-100 p-4">Hello, ${this.name}!</p>`;
     }
 }
 customElements.define("simple-greeting", SimpleGreeting);

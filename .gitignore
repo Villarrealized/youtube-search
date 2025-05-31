@@ -1,4 +1,6 @@
 node_modules
 dist
 bun*
+tailwind-gen.js
+tailwind-gen.css
 .DS_Store
