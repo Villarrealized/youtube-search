@@ -15,7 +15,8 @@
     "private": true,
     "scripts": {
         "dev": "concurrently \"bun -b --hot vite\" \"tailwindcss -i ./src/assets/css/app.css -o ./src/assets/css/tailwind-gen.css --watch\" \"twlit --input ./src/assets/css/tailwind-gen.css --output ./src/assets/js/tailwind-gen.js\" ",
-        "build": "concurrently --success command-2 -k \"tailwindcss -i ./src/assets/css/app.css -o ./src/assets/css/tailwind-gen.css --watch\" \"twlit --input ./src/assets/css/tailwind-gen.css --output ./src/assets/js/tailwind-gen.js\" \"bun -b vite build\" ",
+        "pre-build": "concurrently --success first -k \"sleep 2\" \"tailwindcss -i ./src/assets/css/app.css -o ./src/assets/css/tailwind-gen.css --watch\" \"twlit --input ./src/assets/css/tailwind-gen.css --output ./src/assets/js/tailwind-gen.js\" ",
+        "build": "bun run pre-build && bun -b vite build",
         "preview": "bun -b vite preview"
     },
     "dependencies": {
