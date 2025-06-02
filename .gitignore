@@ -4,3 +4,4 @@ bun*
 tailwind-gen.js
 tailwind-gen.css
 .DS_Store
+.env

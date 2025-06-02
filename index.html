@@ -5,31 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>YouTube Search</title>
         <link rel="stylesheet" href="/src/assets/css/app.css" />
-        <script type="module" src="/src/assets/js/main.js"></script>
-        <script type="module" src="/src/assets/js/simple-greeting.js"></script>
+        <script type="module" src="/src/assets/js/youtube-search.js"></script>
     </head>
     <body>
         <div id="app" class="flex flex-col h-screen bg-dark-200">
-            <div id="titlebar" class="flex h-16 bg-dark-100 border-b-1 border-dark-content-300 items-center shrink-0">
-                <h1 class="flex-1/4 text-2xl px-2 text-dark-content-100">YouTube Search</h1>
-                <label class="input input-lg focus-within:outline-0 grow mr-2 flex-1/2 rounded-lg">
-                    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g
-                            stroke-linejoin="round"
-                            stroke-linecap="round"
-                            stroke-width="2.5"
-                            fill="none"
-                            stroke="currentColor"
-                        >
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.3-4.3"></path>
-                        </g>
-                    </svg>
-                    <input type="search" placeholder="Search" />
-                </label>
+            <div id="titlebar" class="flex h-16 bg-dark-100 border-b-1 border-base-content/10 items-center shrink-0">
+                <h1 class="flex-1/4 text-2xl px-2 text-base-content/90">YouTube Search</h1>
+                <youtube-search class="flex mr-2 flex-1/2"></youtube-search>
                 <div class="flex-1/4"></div>
             </div>
-            <simple-greeting class="flex"></simple-greeting>
         </div>
     </body>
 </html>
