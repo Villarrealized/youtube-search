@@ -1,9 +1,9 @@
 import { html, css, LitElement } from "lit";
-import { TWStyles } from "./tailwind-gen.js";
+import { TWStyles } from "../js/tailwind-gen.js";
 import { Task } from "@lit/task";
 import { range } from "lit/directives/range.js";
 import { map } from "lit/directives/map.js";
-import { fmtCompactNumber, fmtRelativeDate } from "./utils/format.js";
+import { fmtCompactNumber, fmtRelativeDate } from "../js/utils/format.js";
 
 const API_KEY = import.meta.env.VITE_YT_API_KEY;
 const searchUrl = new URL("https://www.googleapis.com/youtube/v3/search");

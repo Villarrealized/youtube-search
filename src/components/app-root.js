@@ -1,5 +1,5 @@
 import { html, css, LitElement } from "lit";
-import { TWStyles } from "./tailwind-gen.js";
+import { TWStyles } from "../js/tailwind-gen.js";
 
 import "./youtube-search.js";
 import "./youtube-results.js";

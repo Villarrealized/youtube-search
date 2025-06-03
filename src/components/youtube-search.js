@@ -1,5 +1,5 @@
 import { html, css, LitElement } from "lit";
-import { TWStyles } from "./tailwind-gen.js";
+import { TWStyles } from "../js/tailwind-gen.js";
 
 export class YouTubeSearch extends LitElement {
     static styles = [TWStyles, css``];
