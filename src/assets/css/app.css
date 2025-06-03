@@ -4,12 +4,6 @@
     themes: dark --default;
 }
 
-@theme {
-    --color-dark-100: #3b414d;
-    --color-dark-200: #2f343e;
-    --color-dark-300: #282c33;
-}
-
 body {
     font-family:
         "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;

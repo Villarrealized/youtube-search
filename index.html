@@ -5,15 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>YouTube Search</title>
         <link rel="stylesheet" href="/src/assets/css/app.css" />
-        <script type="module" src="/src/assets/js/youtube-search.js"></script>
+        <script type="module" src="/src/assets/js/app-root.js"></script>
     </head>
     <body>
-        <div id="app" class="flex flex-col h-screen bg-dark-200">
-            <div id="titlebar" class="flex h-16 bg-dark-100 border-b-1 border-base-content/10 items-center shrink-0">
-                <h1 class="flex-1/4 text-2xl px-2 text-base-content/90">YouTube Search</h1>
-                <youtube-search class="flex mr-2 flex-1/2"></youtube-search>
-                <div class="flex-1/4"></div>
-            </div>
-        </div>
+        <app-root></app-root>
     </body>
 </html>
