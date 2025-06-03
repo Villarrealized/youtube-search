@@ -9,24 +9,21 @@ const API_KEY = import.meta.env.VITE_YT_API_KEY;
 const searchUrl = new URL("https://www.googleapis.com/youtube/v3/search");
 const videosUrl = new URL("https://www.googleapis.com/youtube/v3/videos");
 
-// TODO: remove - only for testing
-function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export class YouTubeResults extends LitElement {
     static styles = [TWStyles, css``];
 
     static properties = {
         keyword: { type: String },
-        order: { type: String },
+        sortOrder: { type: String },
+        sortOptions: { type: Array },
         maxResults: { type: Number },
     };
 
     constructor() {
         super();
         this.keyword = "";
-        this.order = "relevance";
+        this.sortOrder = "relevance";
+        this.sortOptions = ["relevance", "date", "rating"];
         this.maxResults = 25;
     }
 
@@ -56,7 +53,6 @@ export class YouTubeResults extends LitElement {
             }
 
             const videoData = await this._getYouTubeVideoData(videoIds);
-            console.log(videoData);
             const data = videoData.items.map((video) => ({
                 id: video.id,
                 title: video.snippet.title,
@@ -67,8 +63,6 @@ export class YouTubeResults extends LitElement {
                 views: Number(video.statistics.viewCount || 0),
                 comments: Number(video.statistics.commentCount || 0),
             }));
-            // TODO: Remove, only for testing
-            await sleep(2000);
             return data;
         },
         args: () => [this.keyword],
@@ -80,7 +74,7 @@ export class YouTubeResults extends LitElement {
             key: API_KEY,
             part: "snippet",
             q: keyword,
-            order: this.order,
+            order: this.sortOrder,
             maxResults: this.maxResults,
             type: "video",
         }).toString();
@@ -114,6 +108,7 @@ export class YouTubeResults extends LitElement {
 
     _skeletonListHtml() {
         return html`
+            ${this._sortByHtml()}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
                 ${map(
                     range(this.maxResults),
@@ -132,16 +127,7 @@ export class YouTubeResults extends LitElement {
 
     _resultListHtml(videoData) {
         return html`
-            <div class="flex justify-end">
-                <fieldset class="fieldset">
-                    <legend class="fieldset-legend">Sort by</legend>
-                    <select @change="${this._changeSort}" class="select">
-                        <option value="relevance" selected>Relevance</option>
-                        <option value="date">Date</option>
-                        <option value="rating">Rating</option>
-                    </select>
-                </fieldset>
-            </div>
+            ${this._sortByHtml()}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
                 ${videoData.map(
                     (video) => html`
@@ -174,6 +160,26 @@ export class YouTubeResults extends LitElement {
         `;
     }
 
+    _sortByHtml() {
+        return html`
+            <div class="flex justify-end pb-2">
+                <fieldset class="fieldset text-sm pt-0">
+                    <legend class="fieldset-legend pt-0">Sort by</legend>
+                    <select
+                        @change="${this._changeSort}"
+                        .value=${this.sortOrder}
+                        name="sortby"
+                        class="select focus:outline-0"
+                    >
+                        <option value="relevance">Relevance</option>
+                        <option value="date">Date</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                </fieldset>
+            </div>
+        `;
+    }
+
     _errorHtml(e) {
         console.error(e);
         return html`
@@ -189,7 +195,11 @@ export class YouTubeResults extends LitElement {
     }
 
     _changeSort(e) {
-        console.log(e.target.value);
+        const newValue = e.target.value;
+        if (this.sortOptions.includes(newValue)) {
+            this.sortOrder = newValue;
+            this._searchTask.run();
+        }
     }
 }
 customElements.define("youtube-results", YouTubeResults);
