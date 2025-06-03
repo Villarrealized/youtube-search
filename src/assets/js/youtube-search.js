@@ -20,6 +20,7 @@ export class YouTubeSearch extends LitElement {
                     composed: true,
                 }),
             );
+            e.target.elements.search.blur();
         }
     }
 
