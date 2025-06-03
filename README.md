@@ -1,4 +1,4 @@
-# Youtube Search
+# YouTube Search
 
 A simple search results frontend using YouTube's Data API built with Web Components and the Lit library.
 
