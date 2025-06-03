@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@lit/task": "^1.0.2",
+        "date-fns": "^4.1.0",
         "lit": "^3.3.0"
     }
 }

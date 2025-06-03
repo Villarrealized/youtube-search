@@ -3,6 +3,7 @@ import { TWStyles } from "./tailwind-gen.js";
 import { Task } from "@lit/task";
 import { range } from "lit/directives/range.js";
 import { map } from "lit/directives/map.js";
+import { fmtCompactNumber, fmtRelativeDate } from "./utils/format.js";
 
 const API_KEY = import.meta.env.VITE_YT_API_KEY;
 const searchUrl = new URL("https://www.googleapis.com/youtube/v3/search");
@@ -18,13 +19,15 @@ export class YouTubeResults extends LitElement {
 
     static properties = {
         keyword: { type: String },
+        order: { type: String },
         maxResults: { type: Number },
     };
 
     constructor() {
         super();
         this.keyword = "";
-        this.maxResults = 11;
+        this.order = "relevance";
+        this.maxResults = 25;
     }
 
     willUpdate(changedProperties) {
@@ -77,6 +80,7 @@ export class YouTubeResults extends LitElement {
             key: API_KEY,
             part: "snippet",
             q: keyword,
+            order: this.order,
             maxResults: this.maxResults,
             type: "video",
         }).toString();
@@ -110,7 +114,7 @@ export class YouTubeResults extends LitElement {
 
     _skeletonListHtml() {
         return html`
-            <div class="grid grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
                 ${map(
                     range(this.maxResults),
                     () => html`
@@ -128,7 +132,17 @@ export class YouTubeResults extends LitElement {
 
     _resultListHtml(videoData) {
         return html`
-            <div class="grid grid-cols-4 gap-6">
+            <div class="flex justify-end">
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Sort by</legend>
+                    <select @change="${this._changeSort}" class="select">
+                        <option value="relevance" selected>Relevance</option>
+                        <option value="date">Date</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                </fieldset>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
                 ${videoData.map(
                     (video) => html`
                         <div class="flex flex-col">
@@ -140,11 +154,11 @@ export class YouTubeResults extends LitElement {
                                     <a target="_blank" href="https://youtu.be/${video.id}">${video.title}</a>
                                 </div>
                                 <div class="flex text-xs text-base-content/80 line-clamp-1">
-                                    <span>${this._formatNumber(video.views)} views</span>
+                                    <span>${fmtCompactNumber(video.views)} views</span>
                                     <span class="px-1">•</span>
-                                    <span>${this._formatNumber(video.comments)} comments</span>
+                                    <span>${fmtCompactNumber(video.comments)} comments</span>
                                     <span class="px-1">•</span>
-                                    <span>${this._formatDate(video.publishedAt)}</span>
+                                    <span>${fmtRelativeDate(video.publishedAt)}</span>
                                 </div>
                                 <div class="text-xs text-base-content/90 py-3 line-clamp-1">
                                     ${video.channel}</p>
@@ -174,12 +188,8 @@ export class YouTubeResults extends LitElement {
         `;
     }
 
-    _formatNumber(number) {
-        return number;
-    }
-
-    _formatDate(dateString) {
-        return dateString;
+    _changeSort(e) {
+        console.log(e.target.value);
     }
 }
 customElements.define("youtube-results", YouTubeResults);
