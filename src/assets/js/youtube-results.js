@@ -40,7 +40,7 @@ export class YouTubeResults extends LitElement {
             complete: (videoData) => this._resultListHtml(videoData),
             error: (e) => this._errorHtml(e),
         });
-        return html`<div class="p-4">${results}</div>`;
+        return html`<div class="p-4 bg-base-300">${results}</div>`;
     }
 
     _searchTask = new Task(this, {
@@ -97,7 +97,7 @@ export class YouTubeResults extends LitElement {
     _initialHtml() {
         return html`
             <div class="flex justify-center">
-                <div class="card w-md bg-base-300 card-lg shadow-sm">
+                <div class="card w-md bg-base-200 card-lg shadow-sm border-base-content/20 border">
                     <div class="card-body text-center">
                         <p class="text-lg">Type something in the search bar for results</p>
                     </div>

@@ -22,10 +22,10 @@ export class AppRoot extends LitElement {
 
     render() {
         return html`
-            <div id="app" class="flex flex-col h-screen">
+            <div id="app" class="flex flex-col h-screen bg-base-300">
                 <div
                     id="titlebar"
-                    class="flex h-16 bg-base-200/80 border-b-1 border-base-content/10 items-center shrink-0"
+                    class="flex h-16 bg-base-100 border-b-1 border-base-content/20 items-center shrink-0"
                 >
                     <h1 class="flex-1/4 text-2xl px-2 text-base-content/90">YouTube Search</h1>
                     <youtube-search @keywordupdate=${this._onSearch} class="flex mr-2 flex-1/2"></youtube-search>

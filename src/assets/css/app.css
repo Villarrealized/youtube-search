@@ -1,8 +1,43 @@
 @import "tailwindcss";
 @config "../../../tailwind.config.js";
+@plugin "daisyui/theme" {
+    name: "zed";
+    default: true;
+    prefersdark: true;
+    color-scheme: "dark";
+    --color-base-100: #3b414d;
+    --color-base-200: #2f343e;
+    --color-base-300: #282c33;
+    --color-base-content: #dce0e5;
+    --color-primary: #74ade8;
+    --color-primary-content: oklch(96% 0.018 272.314);
+    --color-secondary: #dec184;
+    --color-secondary-content: oklch(98% 0.026 102.212);
+    --color-accent: #a1c181;
+    --color-accent-content: oklch(97% 0.021 166.113);
+    --color-neutral: #2e343e;
+    --color-neutral-content: #dce0e5;
+    --color-info: #74ade8;
+    --color-info-content: oklch(96% 0.018 272.314);
+    --color-success: #a1c181;
+    --color-success-content: oklch(97% 0.021 166.113);
+    --color-warning: #dec184;
+    --color-warning-content: oklch(98% 0.026 102.212);
+    --color-error: #d07277;
+    --color-error-content: oklch(97% 0.013 17.38);
+    --radius-selector: 0.5rem;
+    --radius-field: 0.25rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+}
+
 @plugin "daisyui" {
     /*https://daisyui.com/docs/themes/#list-of-themes*/
-    themes: dark --default;
+    themes: zed --default;
 }
 
 body {
