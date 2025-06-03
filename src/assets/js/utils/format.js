@@ -24,7 +24,6 @@ export function fmtCompactNumber(number) {
         rounded = rounded.slice(0, -2);
     }
 
-    // Ensure result is ≤ 3 characters before suffix
     if (rounded.length > 3) {
         rounded = Math.round(value).toString();
     }
@@ -32,6 +31,8 @@ export function fmtCompactNumber(number) {
     return rounded + suffix;
 }
 
+// format a date similar to how YouTube does
+// ex. 1 year ago, 2 weeks ago, etc.
 export function fmtRelativeDate(dateString) {
     return formatDistanceStrict(new Date(dateString), new Date(), { addSuffix: true });
 }
