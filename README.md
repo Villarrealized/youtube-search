@@ -3,6 +3,7 @@
 A simple search results frontend using YouTube's Data API built with Web Components and the Lit library.
 
 For styling I am using tailwindcss with daisyui to speed up development of common UI components. It's not straightforward to use tailwind with Web Components due to the shadow DOM preventing global classes from piercing through. The `dev` and `pre-build` scripts make this possible by generating the css and converting it to a js file which is imported into each component.
+<img width="1552" alt="Screenshot 2025-06-03 at 8 05 01 AM" src="https://github.com/user-attachments/assets/84016abf-ea38-491b-a0ac-dae8c7a740ae" />
 
 ## Getting started
 Install dependencies
